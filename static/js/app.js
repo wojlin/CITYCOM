@@ -22,17 +22,25 @@ class StopsData{
 }
 
 
+class UserInterfaceManager
+{
+
+}
+
+
 
 class App{
     constructor(){
         console.log("initialized app!");
         this.session = new Session();
+        this.UserInterfaceManager = new UserInterfaceManager();
 
         this.initialDataInfo = {
                                     0: {"full_name": "stops data", "name": "stops_data", "handler": StopsData, "expired_time": 10}
                                };
 
         this.checkInitialData();
+        this.fetchInitialData();
     }
 
     checkInitialData(){
@@ -74,7 +82,18 @@ class App{
     }
 
     fetchInitialData(){
+        for (let entry in this.initialDataInfo) {
+            entry = this.initialDataInfo[entry];
 
+            if(entry["fetched"] == false)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }
 

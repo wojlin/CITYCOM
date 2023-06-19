@@ -1,3 +1,31 @@
+:root
+{
+    --text: rgba(255,255,255,1)
+}
+
+@font-face {
+    font-family: fira_thin;
+    src: url(/static/fonts/FiraSans-Thin.ttf);
+}
+
+@font-face {
+    font-family: fira_light;
+    src: url(/static/fonts/FiraSans-Light.ttf);
+}
+
+@font-face {
+    font-family: fira_bold;
+    src: url(/static/fonts/FiraSans-ExtraBold.ttf);
+}
+
+
+
+p
+{
+    font-family: fira_thin;
+}
+
+
 body 
 {
     padding: 0;
@@ -9,4 +37,9 @@ html, body, #map
 {
     height: 100%;
     width: 100vw;
+}
+
+#map
+{
+    z-index: 1;
 }

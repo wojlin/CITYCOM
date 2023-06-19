@@ -1,0 +1,28 @@
+#fetching_screen
+{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 100;
+}
+
+#fetching_screen_text
+{
+    color: var(--text);
+    font-size: 12vw;
+    margin: auto;
+    text-align: center;
+    margin-top:50%;
+    line-height: 12vw;
+
+}
+
+
+#fetching_screen_loading_bar
+{
+    margin: auto;
+    width: min-content;
+    height: auto;
+}
