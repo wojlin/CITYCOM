@@ -1,6 +1,7 @@
 class Session extends Map {
     set(id, value) {
       if (typeof value === 'object') value = JSON.stringify(value);
+      console.log(id, value);
       sessionStorage.setItem(id, value);
     }
   
@@ -17,14 +18,55 @@ class Session extends Map {
 
 
 
-class StopsData{
+class Requester
+{
+    constructor()
+    {
 
+    }
+
+    get(url, callback)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                callback(JSON.parse(xmlHttp.responseText));
+            }               
+        }
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    }
 }
 
 
 class UserInterfaceManager
 {
+    
+    constructor()
+    {
+        this.fetchingScreen = document.getElementById("fetching_screen");
+        this.fetchingScreenText = document.getElementById("fetching_screen_text");
+        this.delay = 500;
+    }
 
+    showFetchingScreen(){
+        this.fetchingScreen.style.display = "block";
+    }
+
+    hideFetchingScreen()
+    {
+        this.fetchingScreen = document.getElementById("fetching_screen");
+        this.fetchingScreen.style.display = "none";
+    }
+
+    hideFetchingScreenDelay(){
+        setTimeout(this.hideFetchingScreen, this.delay);
+    }
+
+    updateFetchingScreen(data){
+        this.fetchingScreenText.innerHTML = data.toString();
+    }
 }
 
 
@@ -36,11 +78,20 @@ class App{
         this.UserInterfaceManager = new UserInterfaceManager();
 
         this.initialDataInfo = {
-                                    0: {"full_name": "stops data", "name": "stops_data", "handler": StopsData, "expired_time": 10}
+                                    0: {"full_name": "stops data", "name": "stops_data", "expired_time": 10, "url": "https://ckan.multimediagdansk.pl/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/d3e96eb6-25ad-4d6c-8651-b1eb39155945/download/stopsingdansk.json"}
                                };
 
+        this.fetch_delay = 1000;
+
+        
+    }
+
+    start()
+    {
         this.checkInitialData();
         this.fetchInitialData();
+
+        console.log("end")
     }
 
     checkInitialData(){
@@ -70,8 +121,8 @@ class App{
         }
         console.groupEnd();
 
-        this.session.set("stops_data", "xD");
-        this.session.set("stops_data_time", new Date().getTime());
+        //this.session.set("stops_data", "xD");
+        //this.session.set("stops_data_time", new Date().getTime());
         console.log(this.session.get("stops_data_time"));
         
     }
@@ -81,25 +132,72 @@ class App{
         sessionStorage.clear();
     }
 
-    fetchInitialData(){
-        for (let entry in this.initialDataInfo) {
-            entry = this.initialDataInfo[entry];
+    saveData(id, value)
+    {
+        this.session.set(id, value);
+    }
 
-            if(entry["fetched"] == false)
+
+    fetchInitialData(current_index){
+        app.UserInterfaceManager.showFetchingScreen();
+        if(current_index == undefined){
+            current_index = 0;
+        }
+
+        console.log(current_index)
+
+        console.log(app.initialDataInfo)
+        if(current_index >= Object.keys(app.initialDataInfo).length)
+        {
+            console.log("hide");
+            app.UserInterfaceManager.hideFetchingScreenDelay();
+            return;
+        }     
+
+        let entry = app.initialDataInfo[current_index];
+
+        if(entry["is_fetched"] == false)
+        {
+            app.UserInterfaceManager.updateFetchingScreen("fetching " + entry["full_name"] + "...");
+                
+        }else
+        {
+            current_index++;
+            app.fetchInitialData(current_index);
+            return;
+        }
+         
+            
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             {
+                app.saveData(entry["name"], JSON.parse(xmlHttp.responseText));
+                app.saveData("stops_data_time", new Date().getTime());
 
-            }
-            else
-            {
-
+                if(current_index >= Object.keys(app.initialDataInfo).length)
+                {
+                    console.log("hide")
+                    app.UserInterfaceManager.hideFetchingScreenDelay();
+                }     
+                else
+                {
+                    current_index++;
+                    console.log("fetch")
+                    setTimeout(app.fetchInitialData, app.fetch_delay, current_index);
+                }               
             }
         }
+        xmlHttp.open("GET", entry["url"], true);
+        xmlHttp.send(null);
+        
     }
+    
 }
 
 
 var app = new App();
-
+app.start();
 
 
 
