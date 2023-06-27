@@ -1,0 +1,103 @@
+#bottom_UI
+{
+    width: 100vw;
+    height: 25vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    font-size: 0;
+}
+
+#bottom_UI_left
+{
+    display: inline-block;
+    width:25vw;
+    background-color: var(--ui);
+    opacity: 0.8;
+    height: 100%;
+    border-top-right-radius: 4vw;
+}
+
+#bottom_UI_center {
+	display: inline-block;
+	width: 15vw;
+	opacity: 0.8;
+	height: 100%;
+	
+    mask-image: radial-gradient(circle 10px at 50% 1vh, transparent 7.5vw, transparent 1px, black 1px);
+    background: linear-gradient(180deg, rgba(255, 0, 0, 0) 1vw, var(--ui) 1vw, var(--ui) 12vw, var(--ui) 13vw);
+}
+
+#bottom_UI_right
+{
+    display: inline-block;
+    width:60vw;
+    background-color: var(--ui);
+    opacity: 0.8;
+    height: 100%;
+    border-top-left-radius: 4vw;
+    float: right;
+}
+
+
+
+.bottom_UI_button {
+	display: inline-block;
+	text-decoration: none;
+	background-color: #f7f7f7;
+	/* background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7)); */
+	/* background-image: -webkit-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	/* background-image: -moz-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	/* background-image: -ms-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	background-image: -o-linear-gradient(top, #f7f7f7, #e7e7e7);
+	color: #a7a7a7;
+	margin-left: 5vw;
+	width: 13vw;
+	height: 13vw;
+	position: relative;
+	text-align: center;
+	line-height: 13vw;
+	border-radius: 50%;
+	box-shadow: 0px 0.5vw 2vw #919191, inset 0px 0.5vw 6vw #fff;
+	border: solid 2px transparent;
+	margin-top: 7vw;
+    
+}
+
+
+.bottom_UI_button::before {
+	content: "";
+	display: block;
+	background: #fff;
+	border-top: 2px solid #ddd;
+	position: absolute;
+	top: -2vw;
+	left: -2vw;
+	bottom: -2vw;
+	right: -2vw;
+	z-index: -1;
+	border-radius: 50%;
+	box-shadow: inset 0px 8px 48px #ddd;
+}
+  
+  .bottom_UI_button:active {
+    box-shadow: 0px 3px 4px #aaa inset, 0px 2px 3px #fff;
+  }
+  
+  .bottom_UI_button:hover {
+    text-decoration: none;
+    color: #555;
+    background: #f5f5f5;
+  }
+
+
+  .bottom_UI_button_icon
+  {
+    margin: auto;
+    width: 10vw;
+    height: 10vw;
+    margin-top:1vw;
+    display: block;
+  }

@@ -4,6 +4,7 @@
         <title>CITYCOM</title>
         <link rel="stylesheet" href="static/css/fetching_screen.css">
         <link rel="stylesheet" href="static/css/loading_spinner.css">
+        <link rel="stylesheet" href="static/css/bottom_UI.css">
         <link rel="stylesheet" href="static/css/style.css">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -22,7 +23,29 @@
                   </div>
             </div>
         </div>
+        <div id="bottom_UI">
+            <div id="bottom_UI_left">
+
+            </div>
+            <div id="bottom_UI_center">
+
+            </div>
+            <div id="bottom_UI_right">
+                <button class="bottom_UI_button" href="#">
+                    <img class="bottom_UI_button_icon" src="static/images/tram_icon.png" alt="icon"/>
+                </button>
+                <button class="bottom_UI_button" href="#">
+                    <img class="bottom_UI_button_icon" src="static/images/bus_icon.png" alt="icon"/>
+                </button>
+                <button class="bottom_UI_button" href="#">
+                    <img class="bottom_UI_button_icon" src="static/images/stop_icon.png" alt="icon"/>
+                </button>
+            </div>
+        </div>
         <div id="map"></div>
+        
+        <script src="static/js/utils.js"></script>
         <script src="static/js/app.js"></script>
+        
     </body>
 </html>

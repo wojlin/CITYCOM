@@ -1,6 +1,7 @@
 :root
 {
-    --text: rgba(255,255,255,1)
+    --text: rgba(255,255,255,1);
+    --ui: #e84545;
 }
 
 @font-face {
@@ -43,3 +44,6 @@ html, body, #map
 {
     z-index: 1;
 }
+
+.leaflet-control {z-index: 1}
+#map-nav {z-index: 1;}
