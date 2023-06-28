@@ -86,11 +86,15 @@ class App{
         
         this.map = null;
 
-        this.mapLayers = {"stop": [],
-                          "tram": [],
-                           "bus": [],
-                           "other": []
+        this.mapLayers = {"stop": new L.LayerGroup(),
+                          "tram": new L.LayerGroup(),
+                           "bus": new L.LayerGroup(),
+                           "other": new L.LayerGroup()
                         }
+
+        this.zoom = 12;
+
+        this.markerFilters = [];
 
         
     }
@@ -103,7 +107,49 @@ class App{
 
         this.displayStops();
 
+        for(let entry in this.mapLayers)
+        {
+            entry = this.mapLayers[entry];
+            console.log(entry)
+            entry.addTo(this.map);
+            entry.remove(this.map);
+        }
+
         console.log("end")
+    }
+
+    zoomIn(value)
+    {
+        console.log("zooming from " + this.zoom + " to " + (this.zoom += value))
+        this.zoom += value;
+        this.map.setZoom(this.zoom);
+    }
+
+    zoomOut(value)
+    {
+        console.log("zooming from " + this.zoom + " to " + (this.zoom -= value))
+        this.zoom -= value;
+        this.map.setZoom(this.zoom);
+    }
+
+    toogleFilterTab()
+    {
+        console.log("toggling filter tab");
+    }
+
+    filterMarkers(name)
+    {
+        if(this.markerFilters.includes(name)){
+            this.markerFilters.splice(this.markerFilters.indexOf(name), 1);
+            console.log("removed " + name + " from map view");
+            this.mapLayers[name].remove(this.map);
+        }
+        else
+        {
+            this.markerFilters.push(name);
+            console.log("added " + name + " to map view");
+            this.mapLayers[name].addTo(this.map);
+        }
     }
 
     createMap(){
@@ -114,10 +160,13 @@ class App{
             attribution: ''
         }).addTo(this.map);
 
+        this.map.removeControl(this.map.zoomControl);
 
-        this.map.setView([54.3520500, 18.6463700], 12);
+
+        this.map.setView([54.3520500, 18.6463700], this.zoom);
 
         let marker = L.marker([54.43483479706698, 18.624774574836078], {icon: stopIcon}).addTo(this.map);
+        this.mapLayers["other"].addLayer(marker);
     }
 
     displayStops(){   
@@ -140,7 +189,7 @@ class App{
             }
             let marker = L.marker([lat, lon], {icon: stopIcon}).addTo(this.map);
             marker.bindPopup(desc);
-            this.mapLayers["stop"].push(marker);
+            this.mapLayers["stop"].addLayer(marker);
 
         }
     }
@@ -246,6 +295,13 @@ class App{
 
 var app = new App();
 app.start();
+
+
+
+app.map.on('zoomend', function (e) {
+    console.log("zooming from " + app.zoom + " to " + e.target._zoom)
+    app.zoom = e.target._zoom;
+});
 
 
 app.map.on('popupopen', function(e) {

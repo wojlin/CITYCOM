@@ -2,6 +2,10 @@
 {
     --text: rgba(255,255,255,1);
     --ui: #e84545;
+    --ui_button: #f7f7f7;
+    --ui_button_layer: #e7e7e7;
+    --ui_button_outside: #919191;
+    --outside_ui_button: #fff;
 }
 
 @font-face {

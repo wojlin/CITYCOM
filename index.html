@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="static/css/fetching_screen.css">
         <link rel="stylesheet" href="static/css/loading_spinner.css">
         <link rel="stylesheet" href="static/css/bottom_UI.css">
+        <link rel="stylesheet" href="static/css/middle_UI.css">
+        <link rel="stylesheet" href="static/css/buttons.css">
         <link rel="stylesheet" href="static/css/style.css">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -23,6 +25,20 @@
                   </div>
             </div>
         </div>
+        <div id="middle_UI">
+            <button onclick="app.zoomOut(1);" id="zoom_out_button" class="bottom_UI_button middle_UI_button_margin" href="#">
+                <img class="bottom_UI_button_icon" src="static/images/zoom_out_icon.png" alt="icon"/>
+            </button>
+            <button onclick="app.zoomIn(1);" id="zoom_in_button" class="bottom_UI_button middle_UI_button_margin" href="#">
+                <img class="bottom_UI_button_icon" src="static/images/zoom_in_icon.png" alt="icon"/>
+            </button>  
+             
+            <div id="middle_UI_right_corner">
+                <button onclick="app.toogleFilterTab();" id="filter_button" class="bottom_UI_button middle_UI_button_margin" href="#">
+                    <img class="bottom_UI_button_icon" src="static/images/filter.png" alt="icon"/>
+                </button> 
+            </div>
+        </div>
         <div id="bottom_UI">
             <div id="bottom_UI_left">
 
@@ -31,13 +47,13 @@
 
             </div>
             <div id="bottom_UI_right">
-                <button class="bottom_UI_button" href="#">
+                <button onclick="app.filterMarkers('tram');" class="bottom_UI_button bottom_UI_button_margin" href="#">
                     <img class="bottom_UI_button_icon" src="static/images/tram_icon.png" alt="icon"/>
                 </button>
-                <button class="bottom_UI_button" href="#">
+                <button onclick="app.filterMarkers('bus');" class="bottom_UI_button bottom_UI_button_margin" href="#">
                     <img class="bottom_UI_button_icon" src="static/images/bus_icon.png" alt="icon"/>
                 </button>
-                <button class="bottom_UI_button" href="#">
+                <button onclick="app.filterMarkers('stop');" class="bottom_UI_button bottom_UI_button_margin" href="#">
                     <img class="bottom_UI_button_icon" src="static/images/stop_icon.png" alt="icon"/>
                 </button>
             </div>

@@ -1,0 +1,60 @@
+.bottom_UI_button {
+	display: inline-block;
+	text-decoration: none;
+	background-color: var(--ui_button);
+	/* background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7)); */
+	/* background-image: -webkit-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	/* background-image: -moz-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	/* background-image: -ms-linear-gradient(top, #f7f7f7, #e7e7e7); */
+	background-image: -o-linear-gradient(top, var(--ui_button), var(--ui_button_layer));
+	
+	width: 11vw;
+	height: 11vw;
+	position: relative;
+	text-align: center;
+	line-height: 11vw;
+	border-radius: 50%;
+	box-shadow: 0px 0.5vw 2vw var(--ui_button_outside), inset 0px 0.5vw 6vw #fff;
+	border: solid 2px transparent;
+	margin-top: 7vw;
+    
+}
+
+
+
+
+
+.bottom_UI_button::before {
+	content: "";
+	display: block;
+	background: var(--outside_ui_button);
+	border-top: 2px solid #ddd;
+	position: absolute;
+	top: -2vw;
+	left: -2vw;
+	bottom: -2vw;
+	right: -2vw;
+	z-index: -1;
+	border-radius: 50%;
+	box-shadow: inset 0px 8px 48px #ddd;
+}
+  
+  .bottom_UI_button:active {
+    box-shadow: 0px 3px 4px #aaa inset, 0px 2px 3px #fff;
+  }
+  
+  .bottom_UI_button:hover {
+    text-decoration: none;
+    color: #555;
+    background: #f5f5f5;
+  }
+
+
+  .bottom_UI_button_icon
+  {
+    margin: auto;
+    width: 8vw;
+    height: 8vw;
+    margin-top:1vw;
+    display: block;
+  }
